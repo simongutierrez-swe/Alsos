@@ -38,8 +38,8 @@ Second Question:
 Example:
 - input:
     - Names: ['Ball', 'Box', 'Ball', 'Ball'];
-    - Prices: [ 1,      2,     1,      1   ];
-    - Weights:[ 2,      2,     2,      2   ];
+    - Prices: [ 1,     2,     1,      1   ];
+    - Weights:[ 2,     2,     2,      2   ];
 - Output:
     2 - there are two doups for the ball all at the same Name, price and weight
 */
