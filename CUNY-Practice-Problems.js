@@ -1,7 +1,7 @@
 // testing set up
 const invokeFunctions = (arrOfArgs, fn) => {
     arrOfArgs.forEach(e => console.log(fn(e)));
-}
+};
 
 
 // Write a function that tests whether a string is a palindrome.
@@ -17,17 +17,44 @@ const isPali = (str) => {
     }
 
     return true;
-}
+};
 
 const test1 = 'racecar'; // true
 const test2 = ' '; // true
 const test3 = '00100'; // true
 const test4 = 'testfail'; // false
 
-invokeFunctions([test1, test2, test3, test4], isPali);
+// invokeFunctions([test1, test2, test3, test4], isPali);
 
 
 // Write a function that merges two sorted lists into a new sorted list. [1,4,6],[2,3,5] → [1,2,3,4,5,6]. You can do this quicker than concatenating them followed by a sort.
+
+const concateTwoSorted = (args) => {
+    if (args.length < 2) return args.length === 0 ? [] : args[0];
+
+    let newArr = [], p1 = 0, p2 = 0;
+    const [arr1, arr2] = [args[0], args[1]];
+
+    while (p1 < arr1.length || p2 < arr2.length) {
+        if (arr1[p1] <= arr2[p2] && arr1[p1] !== undefined || arr2[p2] === undefined) {
+            newArr.push(arr1[p1]);
+            p1++;
+        } else {
+            newArr.push(arr2[p2]);
+            p2++;
+        }
+    }
+
+    return newArr;
+};
+
+const concat1 = [[1, 4, 6], [2, 3, 5]]; // [1,2,3,4,5,6]
+const concat2 = [[6, 6, 6], [2, 3, 5]]; // [ 2, 3, 5, 6, 6, 6 ]
+const concat3 = [[1, 2, 4, 5, 7, 9, 19], [2]]; // [1, 2, 2, 4, 5, 7, 9, 19]
+const concat4 = []; // []
+const concat5 = [[1, 2, 4]]; // [1, 2, 4]
+
+invokeFunctions([concat1, concat2, concat3, concat4, concat5], concateTwoSorted);
 
 
 // Write a function that rotates a list by k elements. For example [1,2,3,4,5,6] rotated by two becomes [3,4,5,6,1,2]. Try solving this without creating a copy of the list. How many swap or move operations do you need?
