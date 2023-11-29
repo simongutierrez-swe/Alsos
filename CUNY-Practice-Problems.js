@@ -24,7 +24,7 @@ const test2 = ' '; // true
 const test3 = '00100'; // true
 const test4 = 'testfail'; // false
 
-// invokeFunctions([test1, test2, test3, test4], isPali);
+invokeFunctions([test1, test2, test3, test4], isPali);
 
 
 // Write a function that merges two sorted lists into a new sorted list. [1,4,6],[2,3,5] → [1,2,3,4,5,6]. You can do this quicker than concatenating them followed by a sort.
@@ -58,6 +58,45 @@ invokeFunctions([concat1, concat2, concat3, concat4, concat5], concateTwoSorted)
 
 
 // Write a function that rotates a list by k elements. For example [1,2,3,4,5,6] rotated by two becomes [3,4,5,6,1,2]. Try solving this without creating a copy of the list. How many swap or move operations do you need?
+
+const rotate = (nums, k) => {
+    let start = k;
+    let count = 0;
+    let memo = {};
+
+    while (count < nums.length) {
+        if (nums[start] !== undefined) {
+            memo[count] = nums[start];
+        } else {
+            start = 0;
+            memo[count] = nums[start];
+        }
+        count++;
+        start++;
+    }
+
+    // eslint-disable-next-line guard-for-in
+    for (const key in memo) {
+        nums[key] = memo[key];
+    }
+
+    return nums;
+}
+
+const rotateKTimes = (args) => {
+    let [nums, k] = [args[0], args[1]];
+    if (!nums.length || nums.length === k) return nums;
+    k = k > nums.length ? k % nums.length : k;
+
+    return rotate(nums, k);
+};
+
+const rotateTest1 = [[1, 2, 3, 4, 5, 6], 2]; // [3, 4, 5, 6, 1, 2]
+const rotateTest2 = [[1, 2, 3, 4, 5, 6], 5]; // [6, 1, 2, 3, 4, 5]
+const rotateTest3 = [[1, 2, 3, 4, 5, 6], 6]; // [1, 2, 3, 4, 5, 6]
+
+
+invokeFunctions([rotateTest1, rotateTest2, rotateTest3], rotateKTimes);
 
 
 // Write a function that computes the list of the first 100 Fibonacci numbers. The first two Fibonacci numbers are 1 and 1. The n+1-st Fibonacci number can be computed by adding the n-th and the n-1-th Fibonacci number. The first few are therefore 1, 1, 1+1=2, 1+2=3, 2+3=5, 3+5=8.
