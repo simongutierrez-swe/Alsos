@@ -99,7 +99,25 @@ const rotateTest3 = [[1, 2, 3, 4, 5, 6], 6]; // [1, 2, 3, 4, 5, 6]
 invokeFunctions([rotateTest1, rotateTest2, rotateTest3], rotateKTimes);
 
 
-// Write a function that computes the list of the first 100 Fibonacci numbers. The first two Fibonacci numbers are 1 and 1. The n+1-st Fibonacci number can be computed by adding the n-th and the n-1-th Fibonacci number. The first few are therefore 1, 1, 1+1=2, 1+2=3, 2+3=5, 3+5=8.
+// Write a function that computes the list of the first 100 Fibonacci numbers. The first two Fibonacci numbers are 1 and 1. The n+1-st Fibonacci number can be computed by adding the n-th and the n-1-th Fibonacci number. The first few are therefore 1, 1, 1+1=2, 1+2=3, 2+3=5, 3+5=8. Can you do it using recursion?
+const nthFib = (n) => {
+    if (n <= 2) return 1;
+
+    let x = 1;
+    let y = 1;
+
+    for (let i = 2; i < n; i++) {
+        let nextFib = x + y;
+        x = y;
+        y = nextFib;
+    }
+
+    return y;
+};
+
+
+console.log(nthFib(100));
+
 // Write a function that takes a number and returns a list of its digits. So for 2342 it should return [2,3,4,2].
 
 
