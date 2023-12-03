@@ -125,8 +125,30 @@ const convertTwoListOfNums = (int) => {
     return numToSting;
 }
 
-console.log(convertTwoListOfNums(123));
+// console.log(convertTwoListOfNums(123));
+
 // Write a function that takes a list of numbers, a starting base b1 and a target base b2 and interprets the list as a number in base b1 and converts it into a number in base b2 (in the form of a list-of-digits). So for example [2,1,0] in base 3 gets converted to base 10 as [2,1].
 
 
 // Write a function that translates a text to Pig Latin and back. English is translated to Pig Latin by taking the first letter of every word, moving it to the end of the word and adding ‘ay’. “The quick brown fox” becomes “Hetay uickqay rownbay oxfay”.
+
+const pigLatin = (str) => {
+    let first = true;
+    let result = str.split(' ').map((e) => {
+        e = e.toLowerCase().split('');
+        e.push(e.shift());
+
+        if (first) {
+            e[0] = e[0].toUpperCase();
+            first = false;
+        }
+
+        return e.join('') + 'ay';
+    });
+
+    result = result.join(' ');
+
+    return result;
+}
+
+console.log(pigLatin('The quick brown fox') === 'Hetay uickqay rownbay oxfay');
