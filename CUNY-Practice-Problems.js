@@ -129,6 +129,108 @@ const convertTwoListOfNums = (int) => {
 
 // Write a function that takes a list of numbers, a starting base b1 and a target base b2 and interprets the list as a number in base b1 and converts it into a number in base b2 (in the form of a list-of-digits). So for example [2,1,0] in base 3 gets converted to base 10 as [2,1].
 
+function val(c)
+{
+    if (c >= '0' && c <= '9') {return c.charCodeAt(0) - 48;}
+    else {return c.charCodeAt(0) - 65 + 10;}
+}
+
+// Function to convert a number
+// from given base to decimal number
+function toDeci(str, base)
+{
+
+    // Stores the length
+    // of the var
+    var len = str.length;
+
+    // Initialize power of base
+    var power = 1;
+
+    // Initialize result
+    var num = 0;
+
+    // Decimal equivalent is str[len-1]*1
+    // + str[len-2]*base + str[len-3]*(base^2) + ...
+    for (var i = len - 1; i >= 0; i--) {
+
+        // A digit in input number must
+        // be less than number's base
+        if (val(str[i]) >= base) {
+            document.write('Invalid Number');
+            return -1;
+        }
+
+        // Update num
+        num += val(str[i]) * power;
+
+
+        // Update power
+        power = power * base;
+    }
+
+    return num;
+}
+
+// Function to return equivalent
+// character of a given valueString.fromCharCode
+function reVal(num)
+{
+    if (num >= 0 && num <= 9) {return String.fromCharCode(num + 48);}
+    else {return String.fromCharCode(num - 10 + 65);}
+}
+
+// Function to convert a given
+// decimal number to a given base
+function fromDeci(base, inputNum)
+{
+
+    // Store the result
+    var res = '';
+
+    // Repeatedly divide inputNum
+    // by base and take remainder
+    while (inputNum > 0) {
+
+        // Update res
+        res += reVal(inputNum % base);
+
+        // Update inputNum
+        inputNum = Math.floor(inputNum / base);
+    }
+
+    // Reverse the result
+    res = res.split('').reverse().join('');
+
+    return res;
+}
+
+// Function to convert a given number
+// from a base to another base
+function convertBase(s, a, b)
+{
+
+    // Convert the number from
+    // base A to decimal
+    var num = toDeci(s, a);
+
+    // Convert the number from
+    // decimal to base B
+    var ans = fromDeci(b, num);
+
+    // Print the result
+    document.write(ans);
+}
+
+// Driver Code
+// Given input
+var s = '10B';
+var a = 16
+var b = 10;
+
+// Function Call
+convertBase(s, a, b);
+
 
 // Write a function that translates a text to Pig Latin and back. English is translated to Pig Latin by taking the first letter of every word, moving it to the end of the word and adding ‘ay’. “The quick brown fox” becomes “Hetay uickqay rownbay oxfay”.
 
