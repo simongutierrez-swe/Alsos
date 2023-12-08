@@ -39,17 +39,30 @@ const findValidGames = (str) => {
         blue: 14
     };
     let total = 0;
-
     const games = str.split('Game ').filter(e => e !== '');
 
     for (let i = 0; i < games.length; i++) {
-        let game = games[i].split(':');
-        let handfuls = game[1];
-        console.log(handfuls)
+        const [id, game] = games[i].split(':');
+        let handfuls = game.split(';');
+        let isValidGame = true;
+        for (let k = 0; k < handfuls.length; k++) {
+
+            let cubes = handfuls[k].split(',')
+                                    .join('')
+                                    .split(' ')
+                                    .filter(e => e !== '');
+            for (let j = 0; j < cubes.length - 1; j += 2) {
+                let num = Number(cubes[j]);
+
+                if (num > validColorVals[cubes[j + 1]]) isValidGame = false;
+            }
+        }
+
+        if (isValidGame) total += Number(id);
     }
 
     return total;
 }
 
 
-console.log(findValidGames(test));
+console.log(findValidGames(input));
