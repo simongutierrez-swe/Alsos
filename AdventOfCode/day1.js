@@ -24,7 +24,7 @@ In this example, the calibration values of these four lines are 12, 38, 15, and 
 Consider your entire calibration document. What is the sum of all of the calibration values?
 */
 
-const fs = require('fs')
+const fs = require('fs');
 
 const input = fs.readFileSync('./input.txt').toString();
 const test = 'two1nine eightwothree abcone2threexyz xtwone3four 4nineeightseven2 zoneight234 7pqrstsixteen';
