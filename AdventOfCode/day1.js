@@ -26,28 +26,51 @@ Consider your entire calibration document. What is the sum of all of the calibra
 
 const fs = require('fs')
 
-const fileContents = fs.readFileSync('./input.txt').toString();
+const input = fs.readFileSync('./input.txt').toString();
+const test = 'two1nine';
 
-const test = 'two4twofourone1tfpbpqldqgthree1 ddtgjzzlsrvtwofourdvdvtbfv9six 26tfrfptjg7lnqcmninefivejlrmlnsthree six633two32 four58spslgtdh3nkpcgdxbrqx7';
+const numsBank = {
+    one: '1',
+    two: '2',
+    three: '3',
+    four: '4',
+    five: '5',
+    six: '6',
+    seven: '7',
+    eight: '8',
+    nine: '9'
+};
 
 const findCalibrationVals = (str) => {
     let result = str.split(' ');
     let total = 0;
 
-    result.forEach( e => {
+    result.forEach( (e, idx, arr) => {
         let start = 0, end = e.length - 1, first = '', second = '';
 
         while (start < end && !first || !second) {
-            if (Number(e[start]) && !first) {
-                first = e[start];
-            } else if (!first) {
-                start++;
+            if (!first) {
+                const word1 = e + result[idx + 1] + result[idx + 2];
+                const word2 = first + result[idx + 3];
+                const word3 = second + result[idx + 4];
+
+                console.log(arr[idx + 1]);
+
+                if (Number(e[start])) {
+                    first = e[start];
+                // } else if (isWrittenNum()) {
+
+                } else {
+                    start++;
+                }
             }
 
-            if (Number(e[end]) && !second) {
-                second = e[end];
-            } else if (!second) {
-                end--;
+            if (!second) {
+                if (Number(e[end])) {
+                    second = e[end];
+                } else {
+                    end--;
+                }
             }
         }
 
@@ -63,4 +86,39 @@ const findCalibrationVals = (str) => {
     return total;
 };
 
-console.log(findCalibrationVals(fileContents));
+console.log(findCalibrationVals(test)); // 54667
+
+/*
+--- Part Two ---
+Your calculation isn't quite right. It looks like some of the digits are actually spelled out with letters: one, two, three, four, five, six, seven, eight, and nine also count as valid "digits".
+
+Equipped with this new information, you now need to find the real first and last digit on each line. For example:
+
+two1nine
+eightwothree
+abcone2threexyz
+xtwone3four
+4nineeightseven2
+zoneight234
+7pqrstsixteen
+
+In this example, the calibration values are 29, 83, 13, 24, 42, 14, and 76. Adding these together produces 281.
+*/
+
+const isWrittenNum = (strLen3, strLen4, strLen5) => {
+    if (numsBank[strLen3]) {
+        return numsBank[strLen3];
+    } else if (numsBank[strLen4]) {
+        return numsBank[strLen4]
+    } else if (numsBank[strLen5]) {
+        return numsBank[strLen5]
+    }
+}
+
+const isNum = (str) => {
+
+}
+
+const findCalibrationVals2 = (str) => {
+
+}
