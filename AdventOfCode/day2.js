@@ -93,30 +93,32 @@ For each game, find the minimum set of cubes that must have been present. What i
 const findValidGames2 = (str) => {
     const games = str.split('Game ').filter(e => e !== '');
     let total = 0;
-
     for (let i = 0; i < games.length; i++) {
-        const game = games[i].split(':')[1];
-        const maxColorVals = {
-            red: 0,
-            green: 0,
-            blue: 0
+        const [id, game] = games[i].split(':');
+        let maxColorVals = {
+            r: 0,
+            g: 0,
+            b: 0
         };
-        let handfuls = game.split(';'), gameSetTotal = 1;
+        let gameSetTotal = 1;
 
-        for (let k = 0; k < handfuls.length; k++) {
+        for (let k = 3; k < game.length; k++) {
+            const gameVal = Number(game[k] + game[k + 1]) ? Number(game[k] + game[k + 1]) : Number(game[k]);
+            let colorVal, color;
+            if ( maxColorVals[game[k + 2]]) {
+                colorVal = maxColorVals[game[k + 2]];
+                color = game[k + 2];
+            } else {
+                colorVal = maxColorVals[game[k + 3]];
+                color = game[k + 3];
+            }
 
-            let cubes = handfuls[k].split(',')
-                                    .join('')
-                                    .split(' ')
-                                    .filter(e => e !== '');
-
-            for (let j = 0; j < cubes.length - 1; j += 2) {
-                let num = Number(cubes[j]);
-                if (num > maxColorVals[cubes[j + 1]]) {
-                    maxColorVals[cubes[j + 1]] = num;
-                }
+            if (gameVal && gameVal > colorVal) {
+                maxColorVals[color] = gameVal;
             }
         }
+
+        console.log(maxColorVals);
 
         // eslint-disable-next-line guard-for-in
         for (const color in maxColorVals) gameSetTotal *= maxColorVals[color];
@@ -126,4 +128,4 @@ const findValidGames2 = (str) => {
     return total;
 }
 
-console.log(findValidGames2(input));
+console.log(findValidGames2(input)); // 68638
