@@ -11,8 +11,14 @@ const thirdMax = (nums) => {
             set.delete(min);
         }
     }
-
+    // sets size will never exceed three
     return set.size < 3 ? Math.max(...set) : Math.min(...set);
+}
+
+var thirdMax2 = function(nums) {
+    let newArray = [...new Set(nums)].sort((a, b) => a - b);
+
+    return newArray.length >= 3 ? newArray[newArray.length - 3] : newArray[newArray.length - 1];
 }
 
 
