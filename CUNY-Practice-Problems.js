@@ -57,7 +57,7 @@ const concat5 = [[1, 2, 4]]; // [1, 2, 4]
 // invokeFunctions([concat1, concat2, concat3, concat4, concat5], concateTwoSorted);
 
 
-// Write a function that rotates a list by k elements. For example [1,2,3,4,5,6] rotated by two becomes [3,4,5,6,1,2]. Try solving this without creating a copy of the list. How many swap or move operations do you need?
+// Write a function that rotates a list by k elements. For example [1,2,3,4,5,6] rotated by two becomes [5,6,1,2,3,4]. Try solving this without creating a copy of the list. How many swap or move operations do you need?
 
 const rotate = (nums, k) => {
     let start = k > nums.length ? k % nums.length : k;
