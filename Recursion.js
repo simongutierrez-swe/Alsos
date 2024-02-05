@@ -30,5 +30,7 @@ const maxDepth = (root) => {
 
     // induction
     return Math.max(left, right) + 1;
-}
+};
+
+// Sort an array recursively
 
