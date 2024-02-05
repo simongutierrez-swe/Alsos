@@ -175,3 +175,51 @@ class CheckIn {
   //  * obj.checkOut(id,stationName,t)
   //  * var param_3 = obj.getAverageTime(startStation,endStation)
   //  */
+
+  // New Solution
+
+  var UndergroundSystem2 = function() {
+    this.chckIn = new Map();
+    this.avgTime = new Map();
+    this.getKey = (s, e) => s + ',' + e;
+};
+
+/**
+ * @param {number} id
+ * @param {string} stationName
+ * @param {number} t
+ * @return {void}
+ */
+UndergroundSystem.prototype.checkIn = function(id, stationName, t) {
+    this.chckIn.set(id, [stationName, t]);
+};
+
+/**
+ * @param {number} id
+ * @param {string} stationName
+ * @param {number} t
+ * @return {void}
+ */
+UndergroundSystem.prototype.checkOut = function(id, stationName, t) {
+    const [chkInName, chkInTime] = this.chckIn.get(id);
+    this.chckIn.delete(id);
+    const key = this.getKey(chkInName, stationName);
+    if (this.avgTime.has(key)) {
+        let [total, count] = this.avgTime.get(key);
+        let diff = t - chkInTime;
+        this.avgTime.set(key, [total + diff, count + 1]);
+    } else {
+        this.avgTime.set(key, [t - chkInTime, 1]);
+    }
+};
+
+/**
+ * @param {string} startStation
+ * @param {string} endStation
+ * @return {number}
+ */
+UndergroundSystem.prototype.getAverageTime = function(startStation, endStation) {
+    const key = this.getKey(startStation, endStation)
+    const [time, count] = this.avgTime.get(key);
+    return time / count;
+};
